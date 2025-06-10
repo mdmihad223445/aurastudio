@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA STUDIO | PRO GAMER</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #e63946;
+            --secondary: #1d3557;
+            --dark: #0a0a0a;
+            --light: #f1faee;
+            --accent: #457b9d;
+            --success: #2a9d8f;
+            --warning: #e9c46a;
+            --danger: #e76f51;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        /* Navigation */
+        nav {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--primary);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+            filter: drop-shadow(0 0 5px var(--primary));
+            animation: pulse 2s infinite;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(230, 57, 70, 0.3);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+            padding: 2rem;
+        }
+        
+        /* Home Section */
+        #home {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 80vh;
+            padding: 2rem;
+        }
+        
+        .hero {
+            max-width: 800px;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeIn 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            opacity: 0;
+            animation: fadeIn 1s ease 0.5s forwards;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 1s forwards;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--light);
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: var(--light);
+            box-shadow: 0 4px 15px rgba(42, 157, 143, 0.4);
+        }
+        
+        .btn-warning {
+            background: var(--warning);
+            color: var(--dark);
+            box-shadow: 0 4px 15px rgba(233, 196, 106, 0.4);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: var(--light);
+            box-shadow: 0 4px 15px rgba(231, 111, 81, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 25%, rgba(255, 255, 255, 0.1) 50%, transparent 75%);
+            background-size: 400% 400%;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .btn:hover::after {
+            opacity: 1;
+            animation: shine 1.5s infinite;
+        }
+        
+        /* About Section */
+        #about {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .member {
+            background: rgba(29, 53, 87, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            width: 350px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(69, 123, 157, 0.3);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .member.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .member:nth-child(1) {
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            border-color: var(--primary);
+            box-shadow: 0 5px 20px rgba(230, 57, 70, 0.3);
+        }
+        
+        .member:nth-child(2) {
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            border-color: var(--accent);
+            box-shadow: 0 5px 20px rgba(69, 123, 157, 0.3);
+        }
+        
+        .member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .member-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin: 0 auto 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .member:nth-child(2) .member-img {
+            border-color: var(--accent);
+        }
+        
+        .member:hover .member-img {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .member h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .member:nth-child(2) h3 {
+            color: var(--accent);
+        }
+        
+        .member .role {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .member:nth-child(1) .role {
+            color: var(--primary);
+        }
+        
+        .member p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            background: rgba(69, 123, 157, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .member:nth-child(1) .social-links a {
+            background: rgba(230, 57, 70, 0.3);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .member:nth-child(1) .social-links a:hover {
+            background: var(--primary);
+        }
+        
+        .member:nth-child(2) .social-links a:hover {
+            background: var(--accent);
+        }
+        
+        /* Development Section */
+        #development {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .code-container {
+            background: #1a1a2e;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .code-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .code-header {
+            background: #0a0a0a;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot-red {
+            background: #ff5f56;
+        }
+        
+        .dot-yellow {
+            background: #ffbd2e;
+        }
+        
+        .dot-green {
+            background: #27c93f;
+        }
+        
+        .code-title {
+            margin-left: 1rem;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .code-content {
+            padding: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+        }
+        
+        pre {
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .token.comment {
+            color: #6a9955;
+        }
+        
+        .token.keyword {
+            color: #569cd6;
+        }
+        
+        .token.string {
+            color: #ce9178;
+        }
+        
+        .token.function {
+            color: #dcdcaa;
+        }
+        
+        .token.tag {
+            color: #569cd6;
+        }
+        
+        .token.attr-name {
+            color: #9cdcfe;
+        }
+        
+        .token.attr-value {
+            color: #ce9178;
+        }
+        
+        .security-tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .tip-card {
+            background: rgba(29, 53, 87, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(69, 123, 157, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .tip-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .tip-card h3 i {
+            font-size: 1.2rem;
+        }
+        
+        .tip-card p {
+            line-height: 1.6;
+        }
+        
+        /* Services Section */
+        #services {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background: rgba(29, 53, 87, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(69, 123, 157, 0.3);
+            backdrop-filter: blur(5px);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.2);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .service-card p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Stats Section */
+        #stats {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background: rgba(29, 53, 87, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(69, 123, 157, 0.3);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .stat-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover .stat-number {
+            transform: scale(1.1);
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--light);
+        }
+        
+        /* Contact Section */
+        #contact {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-card {
+            background: rgba(29, 53, 87, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(69, 123, 157, 0.3);
+            backdrop-filter: blur(5px);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .contact-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .discord-btn {
+            background: #5865F2;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .discord-btn:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+        }
+        
+        /* Terms Section */
+        #terms {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .terms-content {
+            background: rgba(29, 53, 87, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(69, 123, 157, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .terms-content h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .terms-content h3 {
+            color: var(--accent);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .terms-content p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .terms-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .terms-content li {
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Privacy Policy Section */
+        #privacy {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .privacy-content {
+            background: rgba(29, 53, 87, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(69, 123, 157, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .privacy-content h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .privacy-content h3 {
+            color: var(--accent);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .privacy-content p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .privacy-content li {
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* FAQ Section */
+        #faq {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-container {
+            background: rgba(29, 53, 87, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid rgba(69, 123, 157, 0.3);
+            backdrop-filter: blur(5px);
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(69, 123, 157, 0.3);
+            padding-bottom: 1rem;
+        }
+        
+        .faq-question {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+        
+        .faq-answer.active {
+            max-height: 500px;
+            margin-top: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.8);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--primary);
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .social-footer {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .social-footer a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-footer a:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes shine {
+            0% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 3rem;
+                transition: all 0.5s ease;
+                backdrop-filter: blur(10px);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .member {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+        
+        /* Page Transitions */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <img src="https://cdn-icons-png.freepik.com/512/838/838314.png" alt="Logo" id="logo-img">
+            <h1>AURA STUDIO</h1>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#" class="nav-link active" data-page="home">Home</a>
+            <a href="#" class="nav-link" data-page="about">About Us</a>
+            <a href="#" class="nav-link" data-page="services">Services</a>
+            <a href="#" class="nav-link" data-page="development">Development</a>
+            <a href="#" class="nav-link" data-page="stats">Stats</a>
+            <a href="#" class="nav-link" data-page="contact">Contact</a>
+            <a href="#" class="nav-link" data-page="terms">Terms</a>
+            <a href="#" class="nav-link" data-page="privacy">Privacy</a>
+            <a href="#" class="nav-link" data-page="faq">FAQ</a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main>
+        <!-- Home Page -->
+        <section class="page active" id="home-page">
+            <div id="home">
+                <div class="hero">
+                    <h2>Welcome to AURA STUDIO</h2>
+                    <p>We create amazing Minecraft experiences and develop cutting-edge websites with stunning designs and robust functionality. Our passion for gaming and coding drives us to deliver exceptional results for clients worldwide.</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary" data-page="services">Our Services</a>
+                        <a href="#" class="btn btn-secondary" data-page="about">About Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Us Page -->
+        <section class="page" id="about-page">
+            <div id="about">
+                <h2 class="section-title">About Our Team</h2>
+                <div class="team">
+                    <div class="member">
+                        <img src="https://cdn.discordapp.com/avatars/995171384344973393/13b05a7a0117511b07b736a5812fc5cb.png?size=1024" alt="PRO GAMER" class="member-img">
+                        <h3>PRO GAMER</h3>
+                        <span class="role">Founder & Lead Developer</span>
+                        <p>Hi, I'm PRO GAMER (real name: Mihad). As the founder and main owner of AURA STUDIO, I lead our team in creating innovative Minecraft servers and websites. At 15 years old from Bangladesh, I've already developed numerous successful projects that combine my passion for gaming with technical expertise.</p>
+                        <p>My specialties include server configuration, plugin development, and creating immersive gameplay experiences. When I'm not coding, you'll find me competing in Minecraft PvP tournaments or exploring new mods and game mechanics to incorporate into our projects.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="member">
+                        <img src="https://cdn.discordapp.com/avatars/1205545453752684595/68f848748ea3d561564d4a8718bc6169.png?size=1024" alt="Shadow Peak" class="member-img">
+                        <h3>Shadow Peak</h3>
+                        <span class="role">Web Developer & Designer</span>
+                        <p>Hey there! I'm Shadow Peak, a 13-year-old website developer and Minecraft PvP enthusiast in 9th grade. As the creative force behind our web projects, I specialize in crafting visually stunning and highly functional websites with HTML, CSS, and JavaScript.</p>
+                        <p>My approach combines clean code with modern design principles to create seamless user experiences. In the Minecraft world, I'm known for my strategic PvP skills and ability to analyze game mechanics. I'm constantly learning new technologies to push the boundaries of what we can create.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services Page -->
+        <section class="page" id="services-page">
+            <div id="services">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">We offer a comprehensive range of services to bring your digital vision to life</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <h3>Minecraft Server Development</h3>
+                        <p>Custom Minecraft server setup with plugins, mods, and unique gameplay features tailored to your vision. We create immersive worlds with custom mechanics.</p>
+                        <a href="#" class="btn btn-primary" data-page="contact">Get Started</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Website Development</h3>
+                        <p>Modern, responsive websites built with HTML, CSS, JavaScript and frameworks. From simple portfolios to complex web applications.</p>
+                        <a href="#" class="btn btn-primary" data-page="contact">Get Started</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>UI/UX Design</h3>
+                        <p>Beautiful, intuitive user interfaces designed to enhance user experience and engagement. We combine aesthetics with functionality.</p>
+                        <a href="#" class="btn btn-primary" data-page="contact">Get Started</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Security Solutions</h3>
+                        <p>Comprehensive security audits and protection for your websites and servers. Prevent hacking and unauthorized access.</p>
+                        <a href="#" class="btn btn-primary" data-page="contact">Get Started</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Discord Bot Development</h3>
+                        <p>Custom Discord bots with moderation, music, games, and utility features to enhance your community experience.</p>
+                        <a href="#" class="btn btn-primary" data-page="contact">Get Started</a>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>Technical Support</h3>
+                        <p>Ongoing maintenance and support for your websites and servers. We keep your digital assets running smoothly.</p>
+                        <a href="#" class="btn btn-primary" data-page="contact">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Development Page -->
+        <section class="page" id="development-page">
+            <div id="development">
+                <h2 class="section-title">Development Showcase</h2>
+                <p class="section-subtitle">Explore our coding examples and security best practices</p>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                        </div>
+                        <div class="code-title">index.html</div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Modern Website&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header class="hero"&gt;
+        &lt;h1&gt;Welcome to Our Site&lt;/h1&gt;
+        &lt;p&gt;A modern, responsive website built with love&lt;/p&gt;
+        &lt;a href="#features" class="btn"&gt;Explore&lt;/a&gt;
+    &lt;/header&gt;
+    
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                        </div>
+                        <div class="code-title">style.css</div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code>:root {
+    --primary: #e63946;
+    --secondary: #1d3557;
+    --dark: #0a0a0a;
+    --light: #f1faee;
+}
+
+.hero {
+    background: linear-gradient(135deg, var(--secondary), var(--dark));
+    color: var(--light);
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+}</code></pre>
+                    </div>
+                </div>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <div class="dot dot-red"></div>
+                            <div class="dot dot-yellow"></div>
+                            <div class="dot dot-green"></div>
+                        </div>
+                        <div class="code-title">script.js</div>
+                    </div>
+                    <div class="code-content">
+                        <pre><code>// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Animate elements when they come into view
+const animateOnScroll = () => {
+    const elements = document.querySelectorAll('.animate');
+    
+    elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+            element.classList.add('animated');
+        }
+    });
+};
+
+window.addEventListener('scroll', animateOnScroll);</code></pre>
+                    </div>
+                </div>
+                
+                <h2 class="section-title" style="margin-top: 4rem;">Web Security Tips</h2>
+                <div class="security-tips">
+                    <div class="tip-card">
+                        <h3><i class="fas fa-shield-alt"></i> Secure Authentication</h3>
+                        <p>Always use strong, unique passwords and implement two-factor authentication (2FA) wherever possible. For websites, use bcrypt or Argon2 for password hashing with proper salting.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3><i class="fas fa-lock"></i> HTTPS Everywhere</h3>
+                        <p>Ensure your website uses HTTPS with a valid SSL/TLS certificate. This encrypts data between the server and clients, preventing man-in-the-middle attacks and securing sensitive information.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3><i class="fas fa-code"></i> Input Validation</h3>
+                        <p>Always validate and sanitize user input on both client and server sides to prevent XSS (Cross-Site Scripting) and SQL injection attacks. Use prepared statements for database queries.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3><i class="fas fa-user-secret"></i> How Hackers Operate</h3>
+                        <p>Hackers use automated tools to scan for vulnerabilities like outdated software, weak credentials, or misconfigured servers. They exploit these weaknesses to gain unauthorized access or deploy malware.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3><i class="fas fa-database"></i> Data Protection</h3>
+                        <p>Implement proper access controls and encrypt sensitive data both in transit and at rest. Follow the principle of least privilege for database permissions and regularly audit access logs.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3><i class="fas fa-cloud"></i> Secure Hosting</h3>
+                        <p>Choose reputable hosting providers with strong security measures like firewalls, DDoS protection, and regular backups. Keep all software updated with the latest security patches.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3><i class="fas fa-bug"></i> Vulnerability Scanning</h3>
+                        <p>Regularly scan your websites and servers for vulnerabilities using tools like Nessus or OpenVAS. Address any identified issues promptly to reduce your attack surface.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <h3><i class="fas fa-key"></i> API Security</h3>
+                        <p>Secure your APIs with proper authentication (OAuth, JWT), rate limiting, and input validation. Never expose sensitive data through APIs without proper access controls.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats Page -->
+        <section class="page" id="stats-page">
+            <div id="stats">
+                <h2 class="section-title">Our Achievements</h2>
+                <p class="section-subtitle">Numbers that showcase our growth and impact</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="projects-count">0</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number" id="clients-count">0</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number" id="servers-count">0</div>
+                        <div class="stat-label">Minecraft Servers</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number" id="websites-count">0</div>
+                        <div class="stat-label">Websites Built</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number" id="code-count">0</div>
+                        <div class="stat-label">Lines of Code</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-number" id="experience-count">0</div>
+                        <div class="stat-label">Years Combined Experience</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Us Page -->
+        <section class="page" id="contact-page">
+            <div id="contact">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Have a project in mind or want to collaborate? Reach out to us!</p>
+                
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>Join Our Discord</h3>
+                        <p>Connect with our community, get support, or discuss potential projects on our Discord server. This is the fastest way to reach us for collaboration.</p>
+                        <a href="https://discord.gg/r528VAapEB" class="discord-btn" target="_blank">
+                            <i class="fab fa-discord"></i> Join Now
+                        </a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <h3>Other Contact Methods</h3>
+                        <p><i class="fas fa-envelope"></i> Email: contact@aurastudio.com</p>
+                        <p><i class="fab fa-twitter"></i> Twitter: @AuraStudioDev</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Terms Page -->
+        <section class="page" id="terms-page">
+            <div id="terms">
+                <h2 class="section-title">Terms of Service</h2>
+                <p class="section-subtitle">Last Updated: June 2023</p>
+                
+                <div class="terms-content">
+                    <h2>1. Acceptance of Terms</h2>
+                    <p>By accessing or using any services provided by AURA STUDIO, you agree to be bound by these Terms of Service. If you do not agree to all the terms, you may not access or use our services.</p>
+                    
+                    <h3>2. Services Provided</h3>
+                    <p>We offer Minecraft server development, website design and development, and related digital services. All services are provided "as is" without warranties of any kind.</p>
+                    
+                    <h3>3. User Responsibilities</h3>
+                    <p>Users agree to:</p>
+                    <ul>
+                        <li>Provide accurate information when requesting services</li>
+                        <li>Not use our services for any illegal activities</li>
+                        <li>Respect intellectual property rights</li>
+                        <li>Not attempt to disrupt or compromise our services</li>
+                        <li>Make timely payments for services rendered</li>
+                    </ul>
+                    
+                    <h3>4. Payment and Refunds</h3>
+                    <p>Payment terms will be specified in individual project agreements. Refund policies vary by service and will be communicated before engagement. Generally:</p>
+                    <ul>
+                        <li>Custom development projects require 30% deposit</li>
+                        <li>No refunds after work has commenced unless otherwise agreed</li>
+                        <li>Monthly services can be canceled with 14 days notice</li>
+                    </ul>
+                    
+                    <h3>5. Intellectual Property</h3>
+                    <p>All original content created by AURA STUDIO remains our intellectual property unless otherwise agreed in writing. Clients retain rights to their own content and branding.</p>
+                    
+                    <h3>6. Limitation of Liability</h3>
+                    <p>AURA STUDIO shall not be liable for any indirect, incidental, or consequential damages resulting from the use or inability to use our services. Our total liability for any claim shall not exceed the amount paid for the specific service in question.</p>
+                    
+                    <h3>7. Changes to Terms</h3>
+                    <p>We reserve the right to modify these terms at any time. Continued use of our services after changes constitutes acceptance of the new terms. Major changes will be communicated to active clients.</p>
+                    
+                    <h3>8. Governing Law</h3>
+                    <p>These terms shall be governed by the laws of Bangladesh, without regard to its conflict of law provisions. Any disputes shall be resolved through negotiation first, then through arbitration if necessary.</p>
+                    
+                    <h3>9. Age Requirements</h3>
+                    <p>By using our services, you confirm that you are at least 13 years of age. Users under 18 must have parental consent for any paid services.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Privacy Policy Page -->
+        <section class="page" id="privacy-page">
+            <div id="privacy">
+                <h2 class="section-title">Privacy Policy</h2>
+                <p class="section-subtitle">Last Updated: June 2023</p>
+                
+                <div class="privacy-content">
+                    <h2>1. Information We Collect</h2>
+                    <p>We may collect the following types of information when you use our services:</p>
+                    <ul>
+                        <li>Contact information (email, Discord username, etc.)</li>
+                        <li>Project details and requirements</li>
+                        <li>Payment information (processed through secure third-parties)</li>
+                        <li>Server and website usage data</li>
+                        <li>Communication records</li>
+                    </ul>
+                    
+                    <h3>2. How We Use Your Information</h3>
+                    <p>Your information is used to:</p>
+                    <ul>
+                        <li>Provide and improve our services</li>
+                        <li>Communicate with you about your projects</li>
+                        <li>Process payments</li>
+                        <li>Ensure security and prevent fraud</li>
+                        <li>Comply with legal obligations</li>
+                    </ul>
+                    
+                    <h3>3. Data Protection</h3>
+                    <p>We implement appropriate security measures to protect your data:</p>
+                    <ul>
+                        <li>Encryption of sensitive data</li>
+                        <li>Secure server configurations</li>
+                        <li>Regular security audits</li>
+                        <li>Limited access to personal information</li>
+                    </ul>
+                    
+                    <h3>4. Third-Party Services</h3>
+                    <p>We may use third-party services that have their own privacy policies:</p>
+                    <ul>
+                        <li>Payment processors (PayPal, Stripe)</li>
+                        <li>Hosting providers</li>
+                        <li>Analytics services</li>
+                        <li>Communication platforms (Discord, email providers)</li>
+                    </ul>
+                    
+                    <h3>5. Your Rights</h3>
+                    <p>You have the right to:</p>
+                    <ul>
+                        <li>Access your personal data</li>
+                        <li>Request correction of inaccurate data</li>
+                        <li>Request deletion of your data</li>
+                        <li>Object to processing of your data</li>
+                        <li>Withdraw consent where applicable</li>
+                    </ul>
+                    
+                    <h3>6. Children's Privacy</h3>
+                    <p>We do not knowingly collect personal information from children under 13 without parental consent. If we discover such data, we will take steps to delete it.</p>
+                    
+                    <h3>7. Changes to This Policy</h3>
+                    <p>We may update this policy periodically. Significant changes will be communicated to users via email or Discord.</p>
+                    
+                    <h3>8. Contact Us</h3>
+                    <p>For privacy-related inquiries, please contact us at privacy@aurastudio.com or through our Discord server.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Page -->
+        <section class="page" id="faq-page">
+            <div id="faq">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Find answers to common questions about our services</p>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How do I get started with a project?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Getting started is easy! Join our Discord server and message PRO GAMER or Shadow Peak with details about your project. We'll discuss your requirements, provide a quote, and establish a timeline for delivery.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What are your pricing structures?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our pricing varies based on project complexity and scope. We offer:</p>
+                            <ul>
+                                <li>Fixed-price packages for standard services</li>
+                                <li>Hourly rates for custom development ($15-30/hour)</li>
+                                <li>Monthly maintenance plans</li>
+                                <li>Discounted rates for long-term collaborations</li>
+                            </ul>
+                            <p>Contact us for a personalized quote based on your specific needs.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>How long does a typical project take?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Project timelines vary significantly:</p>
+                            <ul>
+                                <li>Basic websites: 1-2 weeks</li>
+                                <li>Custom Minecraft plugins: 1-4 weeks</li>
+                                <li>Full server setups: 2-6 weeks</li>
+                                <li>Complex web applications: 4+ weeks</li>
+                            </ul>
+                            <p>We provide estimated timelines during the planning phase and keep you updated on progress.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Do you offer ongoing support?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! We offer several support options:</p>
+                            <ul>
+                                <li>30-day bug-fix guarantee on all projects</li>
+                                <li>Monthly maintenance plans</li>
+                                <li>Pay-as-you-go support hours</li>
+                                <li>Emergency support (additional fees apply)</li>
+                            </ul>
+                            <p>Our goal is to ensure your project continues to run smoothly long after delivery.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>What makes your Minecraft servers special?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our Minecraft servers stand out because:</p>
+                            <ul>
+                                <li>We develop custom plugins tailored to your vision</li>
+                                <li>Our servers are optimized for performance and security</li>
+                                <li>We create unique gameplay experiences not found elsewhere</li>
+                                <li>Our designs focus on player engagement and retention</li>
+                                <li>We integrate websites and Discord bots for a complete ecosystem</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>Can you help with server marketing?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>While our primary focus is development, we can:</p>
+                            <ul>
+                                <li>Optimize your server for listings like Minecraft-server-list</li>
+                                <li>Design eye-catching promotional materials</li>
+                                <li>Recommend marketing strategies that have worked for other clients</li>
+                                <li>Connect you with trusted marketing specialists</li>
+                            </ul>
+                            <p>Note that dedicated marketing services may incur additional costs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#" data-page="home">Home</a>
+                <a href="#" data-page="about">About</a>
+                <a href="#" data-page="services">Services</a>
+                <a href="#" data-page="development">Development</a>
+                <a href="#" data-page="contact">Contact</a>
+                <a href="#" data-page="terms">Terms</a>
+                <a href="#" data-page="privacy">Privacy</a>
+                <a href="#" data-page="faq">FAQ</a>
+            </div>
+            
+            <div class="social-footer">
+                <a href="https://discord.gg/r528VAapEB" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            
+            <p class="copyright">© 2023 AURA STUDIO. All rights reserved. | PRO GAMER - Founder & Main Owner</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": ["#e63946", "#457b9d", "#1d3557"]
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#e63946",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // Hamburger menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Page navigation
+            const navLinksAll = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            navLinksAll.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page') + '-page';
+                    
+                    // Hide all pages
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Show selected page
+                    document.getElementById(pageId).classList.add('active');
+                    
+                    // Update active nav link
+                    navLinksAll.forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    link.classList.add('active');
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                    
+                    // Trigger animations for new page
+                    setTimeout(animateOnScroll, 100);
+                });
+            });
+            
+            // Footer links navigation
+            const footerLinks = document.querySelectorAll('.footer-links a');
+            footerLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page') + '-page';
+                    
+                    // Hide all pages
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Show selected page
+                    document.getElementById(pageId).classList.add('active');
+                    
+                    // Update active nav link
+                    navLinksAll.forEach(navLink => {
+                        navLink.classList.remove('active');
+                        if (navLink.getAttribute('data-page') === link.getAttribute('data-page')) {
+                            navLink.classList.add('active');
+                        }
+                    });
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                    
+                    // Trigger animations for new page
+                    setTimeout(animateOnScroll, 100);
+                });
+            });
+            
+            // Animate elements when they come into view
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.member, .code-container, .tip-card, .service-card, .stat-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+            
+            // Logo animation
+            const logoImg = document.getElementById('logo-img');
+            let isHovering = false;
+            
+            logoImg.addEventListener('mouseenter', () => {
+                if (!isHovering) {
+                    isHovering = true;
+                    logoImg.style.animation = 'float 2s ease-in-out';
+                    setTimeout(() => {
+                        logoImg.style.animation = '';
+                        isHovering = false;
+                    }, 2000);
+                }
+            });
+            
+            // FAQ accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const isActive = answer.classList.contains('active');
+                    
+                    // Close all answers first
+                    document.querySelectorAll('.faq-answer').forEach(ans => {
+                        ans.classList.remove('active');
+                    });
+                    
+                    document.querySelectorAll('.faq-question i').forEach(icon => {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    });
+                    
+                    // Toggle current answer if it wasn't active
+                    if (!isActive) {
+                        answer.classList.add('active');
+                        question.querySelector('i').classList.remove('fa-chevron-down');
+                        question.querySelector('i').classList.add('fa-chevron-up');
+                    }
+                });
+            });
+            
+            // Animated stats counter
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const targetValues = [42, 28, 15, 23, 12500, 4];
+            const durations = [2000, 2000, 2000, 2000, 3000, 1500];
+            
+            function animateStats() {
+                statNumbers.forEach((stat, index) => {
+                    const target = targetValues[index];
+                    const duration = durations[index];
+                    const start = 0;
+                    const increment = target / (duration / 16);
+                    let current = start;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            clearInterval(timer);
+                            current = target;
+                        }
+                        
+                        if (index === 4) { // For lines of code
+                            stat.textContent = Math.floor(current).toLocaleString();
+                        } else {
+                            stat.textContent = Math.floor(current);
+                        }
+                    }, 16);
+                });
+            }
+            
+            // Start stats animation when stats page is viewed
+            const statsPage = document.getElementById('stats-page');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateStats();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(statsPage);
+        });
+    </script>
+</body>
+</html>
